@@ -7,7 +7,7 @@
 * Related Document: See README.md
 *
 *******************************************************************************
-* Copyright 2024, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2024-2025, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -190,8 +190,16 @@ cy_rslt_t audio_init(void)
     Cy_SysTick_Init(CY_SYSTICK_CLOCK_SOURCE_CLK_IMO , (8000000/1000)-1);
     Cy_SysTick_SetCallback(0, systick_isr1);        /* point to SysTick ISR to increment the 1ms count */
 
-    /* Initialize Imagimob pre-processing library */
+    /* Initialize DEEPCRAFT pre-processing library */
     IMAI_AED_init();
+    
+    /* If the model selected is for cough detection, set the confidence threshold to 0.7 */
+    #ifdef COUGH_MODEL
+    struct PP_config postprocessing;
+    postprocessing.confidence = 0.7;
+    IMAI_AED_sensitivity(postprocessing);
+    #endif
+
     return 0;
 }
 
@@ -325,7 +333,7 @@ void audio_task(void *pvParameters)
 cy_rslt_t create_audio_task(void)
 {
     BaseType_t status;
-    printf("****************** IMAGIMOB Ready Model %s Code Example ****************** \r\n\n", LABELS[1]);
+    printf("****************** DEEPCRAFT Ready Model: %s ****************** \r\n\n", LABELS[1]);
 
     /* Create the RTOS task */
     status = xTaskCreate(audio_task, AUDIO_TASK_NAME, AUDIO_TASK_STACK_SIZE, NULL, AUDIO_TASK_PRIORITY, &audio_task_handler);

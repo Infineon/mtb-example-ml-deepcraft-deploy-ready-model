@@ -7,7 +7,7 @@
 *
 *
 *******************************************************************************
-* Copyright 2024, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2024-2025, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -279,7 +279,7 @@ void radar_task(void *pvParameters)
         CY_ASSERT(0);
     }
 
-    /* Init Imagimob AI model */
+    /* Init DEEPCRAFT AI model */
     IMAI_RED_init();
     /* Init preprocessing */
     work_arrays = new_preproc_octobertech_work_arrays(&f_cfg);
@@ -599,7 +599,7 @@ static int32_t init_leds(void)
 cy_rslt_t create_radar_task(void)
 {
     BaseType_t status;
-    printf("****************** IMAGIMOB Ready Model Gesture Code Example ****************** \r\n\n");
+    printf("****************** DEEPCRAFT Ready Model: gesture ****************** \r\n\n");
 
     mgr.in_read_radar_data = read_radar_data;
     radar_data_manager_init(&mgr, NUM_SAMPLES_PER_FRAME *6, NUM_SAMPLES_PER_FRAME *2);

@@ -7,7 +7,7 @@
 #
 ################################################################################
 # \copyright
-# Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
+# Copyright 2024-2025, Cypress Semiconductor Corporation (an Infineon company)
 # SPDX-License-Identifier: Apache-2.0
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,8 +21,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-################################################################################
 
+################################################################################
 
 ################################################################################
 # Basic Configuration
@@ -46,7 +46,7 @@ TARGET=CY8CKIT-062S2-AI
 #
 # If APPNAME is edited, ensure to update or regenerate launch
 # configurations for your IDE.
-APPNAME=mtb-example-ml-imagimob-deploy-ready-model
+APPNAME=mtb-example-ml-deepcraft-deploy-ready-model
 
 # Name of toolchain to use. Options include:
 #
@@ -72,6 +72,9 @@ VERBOSE=
 
 # Only GCC_ARM toolchain is supported in this version of the code example
 MTB_SUPPORTED_TOOLCHAINS?=GCC_ARM
+
+# Disable NINJA based build flow
+NINJA=
 ################################################################################
 # Advanced Configuration
 ################################################################################
@@ -86,7 +89,7 @@ MTB_SUPPORTED_TOOLCHAINS?=GCC_ARM
 # ... then code in directories named COMPONENT_foo and COMPONENT_bar will be
 # added to the build
 #
-COMPONENTS+=ML_TFLM_INTERPRETER IFX_CMSIS_NN FREERTOS RTOS_AWARE
+COMPONENTS=ML_TFLM CMSIS_DSP FREERTOS RTOS_AWARE ML_INT8x8
 
 # Like COMPONENTS, but disable optional code that was enabled by default.
 DISABLE_COMPONENTS=
@@ -99,64 +102,65 @@ SOURCES=
 
 # Like SOURCES, but for include directories. Value should be paths to
 # directories (without a leading -I).
-INCLUDES=./imagimob
+INCLUDES=./ready_models
 
 # Add additional defines to the build process (without a leading -D).
 DEFINES=CY_RETARGET_IO_CONVERT_LF_TO_CRLF CY_RTOS_AWARE \
-        ARM_MATH_LOOPUNROLL ARM_TABLE_TWIDDLECOEF_F32_32 ARM_TABLE_BITREVIDX_FLT_32 \
-        ARM_TABLE_TWIDDLECOEF_RFFT_F32_64 \
-        ARM_FAST_ALLOW_TABLES ARM_FFT_ALLOW_TABLES
+	ARM_MATH_DSP ARM_MATH_LOOPUNROLL TF_LITE_STATIC_MEMORY
 
 # model selection
 #
-# GESTURE_MODEL (this model is only supported for the CY8CKIT-062S2-AI)
-# BABYCRY_MODEL
 # COUGH_MODEL
 # ALARM_MODEL
+# BABYCRY_MODEL
 # SIREN_MODEL
 # SNORE_MODEL
+# GESTURE_MODEL (this model is only supported for the CY8CKIT-062S2-AI)
 MODEL_SELECTION=SIREN_MODEL
+
+# Exclude unused libraries
+CY_IGNORE+=$(SEARCH_CMSIS-DSP) ready_models
 
 ifeq (COUGH_MODEL, $(MODEL_SELECTION))
 DEFINES+=COUGH_MODEL
-CY_IGNORE=./source/radar.c
+CY_IGNORE+=./source/radar.c
 # Additional / custom libraries to link in to the application.
-LDLIBS=./imagimob/cough_lib_eval.a
+LDLIBS=./ready_models/cough_lib_eval.a
 endif
 
 ifeq (ALARM_MODEL, $(MODEL_SELECTION))
 DEFINES+=ALARM_MODEL
-CY_IGNORE=./source/radar.c
+CY_IGNORE+=./source/radar.c
 # Additional / custom libraries to link in to the application.
-LDLIBS=./imagimob/alarm_siren_lib_eval.a
+LDLIBS=./ready_models/alarm_siren_lib_eval.a
 endif
 
 ifeq (BABYCRY_MODEL, $(MODEL_SELECTION))
 DEFINES+=BABYCRY_MODEL
-CY_IGNORE=./source/radar.c
+CY_IGNORE+=./source/radar.c
 # Additional / custom libraries to link in to the application.
-LDLIBS=./imagimob/babycry_lib_eval.a
+LDLIBS=./ready_models/babycry_lib_eval.a
 endif
 
 ifeq (SIREN_MODEL, $(MODEL_SELECTION))
 DEFINES+=SIREN_MODEL
-CY_IGNORE=./source/radar.c
+CY_IGNORE+=./source/radar.c
 # Additional / custom libraries to link in to the application.
-LDLIBS=./imagimob/siren_lib_eval.a
+LDLIBS=./ready_models/siren_lib_eval.a
 endif
 
 ifeq (SNORE_MODEL, $(MODEL_SELECTION))
 DEFINES+=SNORE_MODEL
-CY_IGNORE=./source/radar.c
+CY_IGNORE+=./source/radar.c
 # Additional / custom libraries to link in to the application.
-LDLIBS=./imagimob/snore_lib_eval.a
+LDLIBS=./ready_models/snore_lib_eval.a
 endif
 
 ifeq (GESTURE_MODEL, $(MODEL_SELECTION))
 DEFINES+=GESTURE_MODEL
-CY_IGNORE=./source/audio.c
+CY_IGNORE+=./source/audio.c
 # Additional / custom libraries to link in to the application.
-LDLIBS=./imagimob/gesture_lib_eval.a
+LDLIBS=./ready_models/gesture_lib_eval.a
 endif
 
 ifneq (GESTURE_MODEL, $(MODEL_SELECTION))
