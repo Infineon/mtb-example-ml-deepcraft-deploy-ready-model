@@ -222,6 +222,11 @@ cy_rslt_t audio_init(void)
 void audio_task(void *pvParameters)
 {
     cy_rslt_t rslt;
+    /* LED variables */
+    static int led_off = 0;
+    static int led_on = 0;
+
+    static int prediction_count = 0;
 
     rslt = audio_init();
     if(rslt != 0)
@@ -243,14 +248,14 @@ void audio_task(void *pvParameters)
             for (uint32_t index = 0; index < FRAME_SIZE; index++)
             {
 
-                /*convert int to float*/
+                /* Convert int to float */
                 int16_t val_temp = audio_frame[index];
                 float data_in = ((float) val_temp) / 32767.0f;
 
-                /* scale for multiply the audio value */
+                /* Scale for multiplying the audio value */
                 float scale_factor = 20.0f;
 
-                data_in = data_in*scale_factor;
+                data_in = data_in * scale_factor;
 
                 if (data_in > 1.0)
                 {
@@ -263,49 +268,55 @@ void audio_task(void *pvParameters)
 
                 /* Pass audio data for enqueue */
                 IMAI_AED_enqueue(&data_in);
-                /* LED variables */
-                static int led_off = 0;
-                int ledon_t = 0;
 
-                static int prediction_count = 0;
-
-                if (IMAI_AED_dequeue(data_out) == IMAI_RET_SUCCESS)
+                switch(IMAI_AED_dequeue(data_out))
                 {
-                    prediction_count += 1;
-                    if (data_out[1] == 1)
-                    {
-                        /* new line when LED from off to on */
-                        if ((led_off - CYBSP_LED_STATE_ON) > 0)
+                    case IMAI_RET_SUCCESS:
+                        static int16_t success_flag = 1;
+                        prediction_count += 1;
+                        if (data_out[1] == 1)
                         {
-                            printf("\r\n");
-                        }
+                            /* New line when LED from off to on */
+                            if ((led_off - CYBSP_LED_STATE_ON) > 0)
+                            {
+                                printf("\r\n");
+                            }
 
-                        /* print triggered class and the triggered time since IMAI Initial. */
-                        unsigned long t = tick1 - start_t;
-                        char timeString[9];
-                        get_time_from_millisec_audio(t, timeString);
-                        printf("%s %s\r\n", LABELS[1], timeString);
+                            /* Print triggered class and the triggered time since IMAI init.*/
+                            unsigned long t = tick1 - start_t;
+                            char timeString[9];
+                            get_time_from_millisec_audio(t, timeString);
+                            printf("%s %s\r\n",LABELS[1],timeString);
 
-                        cyhal_gpio_write((cyhal_gpio_t) CYBSP_USER_LED, CYBSP_LED_STATE_ON);
-                        led_off = 0;
-                        ledon_t = tick1;
-                    }
-                    else
-                    {
-                        /* only print non-label class every 10 predictions  */
-                        if (prediction_count > DETECTCOUNT)
-                        {
-                            printf(".");
-                            fflush( stdout );
-                            prediction_count = 0;
+                            cyhal_gpio_write((cyhal_gpio_t) CYBSP_USER_LED, CYBSP_LED_STATE_ON);
+                            led_off = 0;
+                            led_on = tick1;
                         }
-                        /* turn off LED after the LED is on for 500ms */
-                        if((tick1 - ledon_t) > LED_STOP_COUNT)
+                        else
                         {
-                            cyhal_gpio_write((cyhal_gpio_t) CYBSP_USER_LED, CYBSP_LED_STATE_OFF);
+                            /* Only print non-label class very 10 predictions */
+                            if (prediction_count>DETECTCOUNT)
+                            {
+                                printf(".");
+                                fflush( stdout );
+                                prediction_count = 0;
+                            }
+                            /* Turn off LED after the LED is on for 500ms */
+                            if((tick1 - led_on) > LED_STOP_COUNT)
+                            {
+                                cyhal_gpio_write((cyhal_gpio_t) CYBSP_USER_LED, CYBSP_LED_STATE_OFF);
+                            }
+                            led_off = 1;
                         }
-                        led_off = 1;
-                    }
+                        break;
+
+                    case IMAI_RET_TIMEDOUT:
+                        if (success_flag == 1)
+                        {
+                            printf("The evaluation period has ended. Please rerun the evaluation or purchase a license for the ready model.\r\n");
+                        }
+                        success_flag = 0;
+                        break;
                 }
             }
         }
