@@ -1,11 +1,11 @@
 # DEEPCRAFT&trade; Ready Model deployment for PSOC&trade; 6 MCU
 
-This code example demonstrates how to integrate a Ready Model library from the DEEPCRAFT&trade; Studio on ModusToolbox&trade;. The code example includes six different models, where five models detect different sounds: 
+This code example demonstrates how to integrate a Ready Model library from the DEEPCRAFT&trade; Studio on ModusToolbox&trade;. The code example includes six different models, where five models detect different sounds:
 - Baby cry detection
-- Cough detection 
-- Alarm detection 
+- Cough detection
+- Alarm detection
 - Siren detection
-- Snoring detection 
+- Snoring detection
 
 These models use data from pulse-density modulation (PDM) to pulse-code modulation (PCM), which is then sent to the model for detection.
 
@@ -14,13 +14,13 @@ The sixth model detects hand gestures uses data from the XENSIV&trade; radar sen
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-ml-deepcraft-deploy-ready-model)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDAzMDMiLCJTcGVjIE51bWJlciI6IjAwMi00MDMwMyIsIkRvYyBUaXRsZSI6IkRFRVBDUkFGVCZ0cmFkZTsgUmVhZHkgTW9kZWwgZGVwbG95bWVudCBmb3IgUFNPQyZ0cmFkZTsgNiBNQ1UiLCJyaWQiOiJqYWluaCIsIkRvYyB2ZXJzaW9uIjoiMi4xLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiSUNXIiwiRG9jIEZhbWlseSI6IlBTT0MifQ==)
+[Provide feedback on this code example.](https://yourvoice.infineon.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDAzMDMiLCJTcGVjIE51bWJlciI6IjAwMi00MDMwMyIsIkRvYyBUaXRsZSI6IkRFRVBDUkFGVCZ0cmFkZTsgUmVhZHkgTW9kZWwgZGVwbG95bWVudCBmb3IgUFNPQyZ0cmFkZTsgNiBNQ1UiLCJyaWQiOiJoYXJzaGl0YW1hbm9qLmphaW5AaW5maW5lb24uY29tIiwiRG9jIHZlcnNpb24iOiIyLjIuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
 
 
 ## Requirements
 
 
-- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.1 or later (tested with v3.4)
+- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.1 or later (tested with v3.8)
 - PSOC&trade; 6 board support package (BSP) minimum required version: 4.0.0
 - Programming language: C
 - Associated parts: All [PSOC&trade; 6 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu) parts
@@ -117,8 +117,8 @@ Argument | Description | Required/optional
 `--app-id`   | Defined in the <id> field of the [CE](https://github.com/Infineon?q=ce-manifest&type=&language=&sort=) manifest | Required
 `--target-dir`| Specify the directory in which the application is to be created if you prefer not to use the default current working directory | Optional
 `--user-app-name`| Specify the name of the application if you prefer to have a name other than the example's default name | Optional
-
 <br>
+
 
 > **Note:** The project-creator-cli tool uses the `git clone` and `make getlibs` commands to fetch the repository and import the required libraries. For details, see the "Project creator tools" section of the [ModusToolbox&trade; tools package user guide](https://www.infineon.com/ModusToolboxUserGuide) (locally available at {ModusToolbox&trade; install directory}/docs_{version}/mtb_user_guide.pdf).
 
@@ -193,7 +193,8 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
    Snore detection      | `SNORE_MODEL`
    Gesture detection    | `GESTURE_MODEL`
 
-   > **Note:** Currently, gesture detection is only supported for the CY8CKIT-062S2-AI kit
+
+    >**Note:** Currently, gesture detection is only supported for the CY8CKIT-062S2-AI kit
 
 2. Open a terminal program and select the KitProg3 COM port. Set the serial port parameters to 8N1 and 115200 baud
 
@@ -232,7 +233,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
    **Figure 2. Terminal output on program startup for cough detection**
 
    ![](images/siren-detect.png)
-   
+
    <br>
 
    **Figure 3. Terminal output for recognized hand gestures**
@@ -240,9 +241,8 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
    **Push gesture** | **Swipe left gesture** | **Swipe right gesture** | **Swipe up gesture** | **Swipe down gesture**
    ------------------------| ------------------------| ------------------------ | --------------------- | -----------------------
    ![](images/pushgif.gif) | ![](images/leftgif.gif) | ![](images/rightgif.gif) | ![](images/upgif.gif) | ![](images/downgif.gif)
-    
-   <br>
-    
+
+
 
 ## Debugging
 
@@ -275,13 +275,13 @@ This code example provides the Ready Model library for the following use cases u
 
 ### Audio detection
 
-There are five models that detect different sounds such as baby cry, cough, alarm, siren, and snoring. The models use data from pulse-density modulation (PDM) to pulse-code modulation (PCM), which is then sent to the model for detection.
+There are five models designed to detect different sounds, such as baby cry, cough, alarm, siren, and snoring. The models process audio data converted from pulse-density modulation (PDM) to pulse-code modulation (PCM), which is then sent to the model for detection.
 
-The data consists of PDM/PCM data. The PDM/PCM is sampled at 16 kHz and an interrupt is generated after 1024 samples are collected. After 1024 samples are collected, the data is fed to the DEEPCRAFT&trade; preprocessor through the `IMAI_AED_enqueue` function. After the preprocessor has enough data captured, `IMAI_AED_dequeue` returns a 60 by 20 buffer stored with the preprocessed data. This data is then passed to the model to detect and display the results on the UART terminal.
+The data consists of PDM/PCM audio samples. The PDM/PCM data is sampled at 16 kHz, and an interrupt is generated after 1024 samples are collected. Once 1024 samples are available, the data is fed to the DEEPCRAFT&trade; preprocessor through the `IMAI_AED_enqueue` function. After the preprocessor has enough data captured, `IMAI_AED_dequeue` returns a 60 by 20 buffer stored with the preprocessed data. This data is then passed to the model to detect and display the results on the UART terminal.
 
 - **Cough detection:** This model gathers PDM/PCM audio data to detect cough audio
 
-- **Alarm detection:** This model gathers PDM/PCM audio data to detect alarm (for example, fire alarm) audio
+- **Factory alarm detection:** This model gathers PDM/PCM audio data to detect alarm (for example, fire alarm) audio
 
 - **Baby cry detection:** This model gathers PDM/PCM audio data to detect baby crying audio
 
@@ -289,12 +289,161 @@ The data consists of PDM/PCM data. The PDM/PCM is sampled at 16 kHz and an inter
 
 - **Snore detection:** This model gathers PDM/PCM audio data to detect snoring audio
 
+The models are trained and designed to detect real instances of sounds. These sounds may differ from how they appear when played back through a speaker. For example, a real baby cry is around 100 dB to 120 dB, whereas playback from a speaker is usually around 50 dB. In such cases, the model may question the validity of the sound and may not trigger a detection. Therefore, whenever possible, testing should be performed in realistic scenarios.
+
+
+#### Potential test setup
+
+- **Cough detection:** Run the model on a wearable device, or place it on a desk nearby within 2 metres. Perform a forceful cough, as if you are sick, and observe the output
+
+- **Factory alarm detection:** Run the model on a device in the factory, coordinate with the factory operation managers to schedule a time for testing when the alarms will be used. Observe the output of the model
+
+- **Baby cry detection:** Run the model on a device and place it on a table about 2 metres away. Position a baby in a crib nearby and run the model continuously. Wait for a natural cry event and observe the model's detection output. Since this may take some time, a recording device can be used in parallel to correlate the detection time with the actual cry
+
+- **Siren detection:** Contact your local ambulance, police, or firetruck facility for assistance. Run the model on the device and ask them to drive past with the siren activated. Observe the model output for detection
+
+- **Snore detection:** Run the model on the device and place it on a bedside table. Allow the model to run overnight to detect real snores events. To validate the predictions, you can run a recording device in parallel and cross-validate the detected snore events. Alternatively, you can control the environment by ensuring one scenario where snoring is expected and another where it is not, and then verify the results using the terminal output
+
+
+#### Audio signal properties diagnostic
+
+This application includes an optional audio properties feature to monitor real-time audio signal characteristics, useful for microphone gain calibration and signal quality assessment. This feature exists to help you get a better understanding of the audio signal properties without listening to it. You can use it for example to evaluate if the audio is too loud or too quiet or if you are getting too much signal saturation in the system which can cause a distorted sound.
+
+##### Enabling audio properties
+
+To enable the audio properties feature, edit the *Makefile* in the project directory and set the `AUDIO_PROPERTIES` variable to `ENABLE`:
+
+```
+AUDIO_PROPERTIES=ENABLE
+```
+
+By default, `AUDIO_PROPERTIES` is set to `DISABLE`. After changing this setting, rebuild the application:
+
+```
+make clean
+make build
+```
+
+##### Audio properties output
+
+When the audio properties feature is enabled, signal metrics are calculated and printed for each audio frame processed. The feature analyzes the audio buffer to extract signal quality information.
+
+- **Measurement unit:** Normalized float values (0.0 to 1.0)
+- **Output format:** Each line shows the signal analysis for one audio frame
+
+Example UART output when audio properties is enabled alone:
+```
+RMS: 0.004321, Clip Count: 0, Max: 0.008923 Buff: 73
+RMS: 0.003456, Clip Count: 1, Max: 0.009234 Buff: 64
+RMS: 0.005123, Clip Count: 0, Max: 0.010567 Buff: 82
+```
+
+Where:
+- `RMS: <value>` – Root mean square (RMS) audio level, normalized to [0, 1]
+- `Clip Count: <count>` – Number of samples in the frame that exceeded the clipping threshold (|sample| > 0.95)
+- `Max: <value>` – Peak sample magnitude (maximum absolute value) in the frame
+- `Buff: <value>` – Sample value at buffer position 200 (for diagnostic reference)
+
+#### Microphone gain settings
+
+For effective microphone utilization, it is important to ensure that the gain of the microphone is configured correctly so that incoming sounds are captured at the appropriate amplitude. This helps the model to perform detection more reliably, as the input audio is closer to what the model expects. For example, a snore arrives at a lower amplitude and is relatively quiet, whereas a siren is received at a much higher amplitude and is significantly louder. Below are two examples of microphone calibration. In practice, you can use a standard smart phone as a baseline reference and adjust the MCU microphone output to match it.
+
+Bear in mind when performing the tuning/calibration the steps are first done for the positive data in order to get it into the right ballpark then it was validated by testing on the negative data to ensure we don't overtune the sensitivity. In the end the goal is to tune the microphone so that the sound levels come out balanced and as if recorded with a standard off the shelf recording device. We're not trying to finetune the microphone for a specific sound.
+
+##### Calibrating the microphone for snore detection
+1. Record a reference snore sample using the target device
+   * Record audio from a real snoring event (do not use loudspeaker playback)
+   * Maintain a distance of at least 0.5 m and no more than 1.0 m from the sound source
+   * Perform the recording under normal operating conditions
+2. Measure RMS
+   * Calculate RMS value for the snore event only
+3. Compare the measured RMS value against the training data range
+   * Target snore RMS range: [-51 dB, -21 dB] as determined from a data-distribution study
+4. Adjust microphone gain
+   * If RMS is below the target range, gradually increase the gain
+   * If RMS is above the target range, gradually decrease the gain
+5. Verify using non-snore RMS
+   * Record typical “home” sounds such as speech, movement, and ambient noises
+   * Training non‑snore RMS target range: [-30 dB, -16 dB]
+   * If the measured non‑snore RMS target range falls within this range, the calibration is confirmed
+   * If not: fine‑tune the gain, prioritizing alignment with the snore RMS target, and then re‑check
+
+
+##### Calibrating the microphone for baby cry detection
+1. Record a reference baby cry sample using the target device
+   * Record audio from a real baby cry event (do not use loudspeaker playback)
+   * Maintain a distance of at least 0.2 m and no more than 1.0 m from the sound source
+   * Perform the recording under normal operating conditions
+2. Measure RMS
+   * Calculate RMS value for the baby cry event only
+3. Compare the measured RMS value against the training data range
+   * Target baby cry RMS range: [-50 dB, -15 dB]
+4. Adjust microphone gain
+   * If the RMS value is below the target range, gradually increase the gain
+   * If the RMS value is above the target range, gradually decrease the gain
+5. Verify using non-baby cry RMS
+   * Record typical baby sounds such as talking, laughing, and cooing
+   * Training non-baby-cry RMS target range: [-50 dB, -10 dB]
+   * If the measured non-baby-cry RMS falls within this range, the calibration is confirmed
+   * If not, fine-tune the gain, prioritizing alignment with the baby-cry RMS target, and then re-check
+
+
+##### Utilizing the gain cycling feature
+This example includes a runtime software-gain control mechanism that is mapped to the user button (`CYBSP_USER_BTN`). This button then controls the following variable in the code `scaling_factor` through an ISR.
+
+Each button press cycles the scaling factor through six levels in a loop:
+- 2
+- 4
+- 6
+- 8
+- 10
+- 1
+
+After each button press, the current scaling factor is printed on the UART terminal, allowing users to immediately confirm the active gain level. This feature can be used during testing to adjust the input signal amplitude to a realistic range for the environment and model which helps when doing general testing. This feature allows you to increase the microphone gain during runtime.
+
+To utilise this correctly you can check the incoming sound level and increase or decrease the software gain multiplier to adjust level so that it balances out the sound to a realistic level so that you can maximise the prediction accuracy.
+
+#### Performance profiling for audio detection
+
+This application includes an optional profiling feature to measure and monitor inference latency of the audio detection models running on the FreeRTOS-based system. This lets you understand better how the model is running and evaluate if it's running quick enough to avoid bottlenecks.
+
+##### Enabling profiling
+
+To enable the profiling feature, edit the *Makefile* in the project directory and set the `PROFILING` variable to `ENABLE`:
+
+```
+PROFILING=ENABLE
+```
+
+By default, `PROFILING` is set to `DISABLE`. After changing this setting, rebuild the application:
+
+```
+make clean
+make build
+```
+
+##### Profiling output
+
+When profiling is enabled, the inference time for each audio frame is printed to the UART terminal. The profiling feature measures the time elapsed between audio frame queueing and model inference result, providing real-time insights into detection latency on the target hardware.
+
+- **Measurement unit:** Milliseconds (ms)
+- **Time resolution:** 1 ms (based on SysTick counter)
+- **Output format:** Each line shows the inference time for one input data window
+
+Example UART output when profiling is enabled alone:
+```
+infer_time: 27
+infer_time: 28
+infer_time: 27
+```
+
+This example tells us that in the 3 times the model was run, the time it took to perform a forward pass through the pre-processor and the network was 27, 28 and 27 milliseconds.
 
 ### Gesture detection
 
-The gesture detection model gathers preprocessed radar data to detect different gestures such as left, right, up, down, push using the Ready Model library.
+The gesture detection model gathers preprocessed radar data to detect different gestures, such as left, right, up, down, and push using the Ready Model library.
 
-The data consist of raw radar sensor data. After data collection, preprocessing is done on the raw data. It is then fed to the DEEPCRAFT&trade; preprocessor through the `IMAI_AED_enqueue` function. After the preprocessor has sufficient data captured, `IMAI_AED_dequeue` returns a buffer stored with the preprocessed data. The data is then passed to the gesture detection model – the detected results are then displayed on the UART terminal.
+The data consist of raw radar sensor data. After data collection, preprocessing is done on the raw data. It is then fed to the DEEPCRAFT&trade; preprocessor through the `IMAI_AED_enqueue` function. After the preprocessor has sufficient data captured, `IMAI_AED_dequeue` returns a buffer stored with the preprocessed data. The data is then passed to the gesture detection model. The detected results are then displayed on the UART terminal.
 
 
 ### Resources and settings
@@ -307,7 +456,6 @@ The data consist of raw radar sensor data. After data collection, preprocessing 
  UART (HAL)    | cy_retarget_io_uart_obj | UART HAL object used by Retarget-IO for the Debug UART port
  SPI (HAL)     | spi_obj                 | SPI HAL object used to communicate with the radar sensor
  PDM_PCM       | pdm_pcm                 | PDM HAL object used to interact with the kit PDM sensors
-
 <br>
 
 
@@ -340,6 +488,7 @@ Document title: *CE240303* – *DEEPCRAFT&trade; Ready Model deployment for PSOC
  1.0.0   | New code example
  2.0.0   | Updated to support ml-tflite-micro v3.X
  2.1.0   | Added switch cases for handling different states of the ready model
+ 2.2.0   | Implemented DMA-based PDM microphone capture for improved performance <br> Added profiling feature <br> Added feature to calculate different properties of the audio signal <br> Added button press functionality to cycle through different scaling factors for the audio signal
 <br>
 
 
@@ -349,10 +498,10 @@ The Bluetooth&reg; word mark and logos are registered trademarks owned by Blueto
 
 PSOC&trade;, formerly known as PSoC&trade;, is a trademark of Infineon Technologies. Any references to PSoC&trade; in this document or others shall be deemed to refer to PSOC&trade;.
 
+
 ---------------------------------------------------------
 
-© Cypress Semiconductor Corporation, 2024-2025. This document is the property of Cypress Semiconductor Corporation, an Infineon Technologies company, and its affiliates ("Cypress").  This document, including any software or firmware included or referenced in this document ("Software"), is owned by Cypress under the intellectual property laws and treaties of the United States and other countries worldwide.  Cypress reserves all rights under such laws and treaties and does not, except as specifically stated in this paragraph, grant any license under its patents, copyrights, trademarks, or other intellectual property rights.  If the Software is not accompanied by a license agreement and you do not otherwise have a written agreement with Cypress governing the use of the Software, then Cypress hereby grants you a personal, non-exclusive, nontransferable license (without the right to sublicense) (1) under its copyright rights in the Software (a) for Software provided in source code form, to modify and reproduce the Software solely for use with Cypress hardware products, only internally within your organization, and (b) to distribute the Software in binary code form externally to end users (either directly or indirectly through resellers and distributors), solely for use on Cypress hardware product units, and (2) under those claims of Cypress's patents that are infringed by the Software (as provided by Cypress, unmodified) to make, use, distribute, and import the Software solely for use with Cypress hardware products.  Any other use, reproduction, modification, translation, or compilation of the Software is prohibited.
+(c) 2026, Infineon Technologies AG, or an affiliate of Infineon Technologies AG. All rights reserved.
+This software, associated documentation and materials ("Software") is owned by Infineon Technologies AG or one of its affiliates ("Infineon") and is protected by and subject to worldwide patent protection, worldwide copyright laws, and international treaty provisions. Therefore, you may use this Software only as provided in the license agreement accompanying the software package from which you obtained this Software. If no license agreement applies, then any use, reproduction, modification, translation, or compilation of this Software is prohibited without the express written permission of Infineon.
 <br>
-TO THE EXTENT PERMITTED BY APPLICABLE LAW, CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH REGARD TO THIS DOCUMENT OR ANY SOFTWARE OR ACCOMPANYING HARDWARE, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  No computing device can be absolutely secure.  Therefore, despite security measures implemented in Cypress hardware or software products, Cypress shall have no liability arising out of any security breach, such as unauthorized access to or use of a Cypress product. CYPRESS DOES NOT REPRESENT, WARRANT, OR GUARANTEE THAT CYPRESS PRODUCTS, OR SYSTEMS CREATED USING CYPRESS PRODUCTS, WILL BE FREE FROM CORRUPTION, ATTACK, VIRUSES, INTERFERENCE, HACKING, DATA LOSS OR THEFT, OR OTHER SECURITY INTRUSION (collectively, "Security Breach").  Cypress disclaims any liability relating to any Security Breach, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any Security Breach.  In addition, the products described in these materials may contain design defects or errors known as errata which may cause the product to deviate from published specifications. To the extent permitted by applicable law, Cypress reserves the right to make changes to this document without further notice. Cypress does not assume any liability arising out of the application or use of any product or circuit described in this document. Any information provided in this document, including any sample design information or programming code, is provided only for reference purposes.  It is the responsibility of the user of this document to properly design, program, and test the functionality and safety of any application made of this information and any resulting product.  "High-Risk Device" means any device or system whose failure could cause personal injury, death, or property damage.  Examples of High-Risk Devices are weapons, nuclear installations, surgical implants, and other medical devices.  "Critical Component" means any component of a High-Risk Device whose failure to perform can be reasonably expected to cause, directly or indirectly, the failure of the High-Risk Device, or to affect its safety or effectiveness.  Cypress is not liable, in whole or in part, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any use of a Cypress product as a Critical Component in a High-Risk Device. You shall indemnify and hold Cypress, including its affiliates, and its directors, officers, employees, agents, distributors, and assigns harmless from and against all claims, costs, damages, and expenses, arising out of any claim, including claims for product liability, personal injury or death, or property damage arising from any use of a Cypress product as a Critical Component in a High-Risk Device. Cypress products are not intended or authorized for use as a Critical Component in any High-Risk Device except to the limited extent that (i) Cypress's published data sheet for the product explicitly states Cypress has qualified the product for use in a specific High-Risk Device, or (ii) Cypress has given you advance written authorization to use the product as a Critical Component in the specific High-Risk Device and you have signed a separate indemnification agreement.
-<br>
-Cypress, the Cypress logo, and combinations thereof, ModusToolbox, PSoC, CAPSENSE, EZ-USB, F-RAM, and TRAVEO are trademarks or registered trademarks of Cypress or a subsidiary of Cypress in the United States or in other countries. For a more complete list of Cypress trademarks, visit www.infineon.com. Other names and brands may be claimed as property of their respective owners.
+Disclaimer: UNLESS OTHERWISE EXPRESSLY AGREED WITH INFINEON, THIS SOFTWARE IS PROVIDED AS-IS, WITH NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ALL WARRANTIES OF NON-INFRINGEMENT OF THIRD-PARTY RIGHTS AND IMPLIED WARRANTIES SUCH AS WARRANTIES OF FITNESS FOR A SPECIFIC USE/PURPOSE OR MERCHANTABILITY. Infineon reserves the right to make changes to the Software without notice. You are responsible for properly designing, programming, and testing the functionality and safety of your intended application of the Software, as well as complying with any legal requirements related to its use. Infineon does not guarantee that the Software will be free from intrusion, data theft or loss, or other breaches (“Security Breaches”), and Infineon shall have no liability arising out of any Security Breaches. Unless otherwise explicitly approved by Infineon, the Software may not be used in any application where a failure of the Product or any consequences of the use thereof can reasonably be expected to result in personal injury.

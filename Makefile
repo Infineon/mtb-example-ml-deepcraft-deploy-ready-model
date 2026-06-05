@@ -7,8 +7,8 @@
 #
 ################################################################################
 # \copyright
-# Copyright 2024-2025, Cypress Semiconductor Corporation (an Infineon company)
-# SPDX-License-Identifier: Apache-2.0
+# (c) 2024-2026, Infineon Technologies AG, or an affiliate of Infineon
+# Technologies AG.  SPDX-License-Identifier: Apache-2.0
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -108,6 +108,18 @@ INCLUDES=./ready_models
 DEFINES=CY_RETARGET_IO_CONVERT_LF_TO_CRLF CY_RTOS_AWARE \
 	ARM_MATH_DSP ARM_MATH_LOOPUNROLL TF_LITE_STATIC_MEMORY
 
+# Enable or disable profiling if you want to compute the inference time of the model
+PROFILING=DISABLE
+
+ifeq (ENABLE, $(PROFILING))
+DEFINES+=PROFILING_ENABLED
+endif
+
+AUDIO_PROPERTIES=DISABLE
+ifeq (ENABLE, $(AUDIO_PROPERTIES))
+DEFINES+=AUDIO_PROPERTIES_ENABLED
+endif
+
 # model selection
 #
 # COUGH_MODEL
@@ -189,7 +201,7 @@ CXXFLAGS=
 ASFLAGS=
 
 # Additional / custom linker flags.
-LDFLAGS=
+LDFLAGS+=-Wl,--no-warn-rwx-segments
 
 # Path to the linker script to use (if empty, use the default linker script).
 LINKER_SCRIPT=
